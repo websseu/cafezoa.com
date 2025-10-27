@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# --- 1️⃣ /starbucks/숫자 형태를 내부적으로 ?store=숫자로 변환 ---
+RewriteRule ^starbucks/([0-9]+)$ index.php?store=$1 [L,QSA]
+
+# --- 2️⃣ 파일/디렉터리가 실제로 존재하면 그대로 접근 ---
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+</IfModule>
